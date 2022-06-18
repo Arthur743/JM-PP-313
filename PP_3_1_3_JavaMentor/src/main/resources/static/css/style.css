@@ -1,0 +1,50 @@
+.btnEdite{
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+}
+.btnDelete{
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+}
+.col-md-10{
+    height:100vh;
+    background-color:#f8f8f8;
+    border-radius: 10px 10px 10px 10px;
+}
+.hatTable{
+    background-color:#C0C0C0;
+    border-radius: 0px 10px 0px 0px;
+}
+.form-select{
+    border-radius: 5px 5px 5px 5px;
+    border: #808080;
+}
+.btnAddNewUser{
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFAFA;
+    background-color:#2F4F4F;
+    display: inline-block;
+    border: none;
+    right: 30px;
+    line-height: 30px;
+}
+.inputBox{
+    border-radius: 5px 5px 5px 5px;
+    border: #808080;
+}
+.rowTable{
+    border-radius: 5px 5px 5px 5px;
+}
+.rowTable2{
+    border-radius: 0px 0px 10px 10px;
+}
+.rowTable3{
+    border-radius: 5px 5px 5px 5px;
+}
+.tab-pane{
+    border-radius: 0px 0px 10px 10px;
+}

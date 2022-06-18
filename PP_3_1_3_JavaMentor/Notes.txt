@@ -1,0 +1,277 @@
+Aksyonova Ekaterina
+Aktuganova Diana
+Akulova Elizaveta
+Andreeva Elina
+Amandosova Faina
+------------------------------------------------------------------------------------------------------------------------
+insert users (name, surname, username, password) VALUES ('Ekaterina', 'Aksyonova', 'ea', '1');
+insert users (name, surname, username, password) VALUES ('Diana', 'Aktuganova', 'da', '2');
+insert users (name, surname, username, password) VALUES ('Faina', 'Amandosova', 'fa', '3');
+insert roles (role_name) VALUE ('ADMIN');
+insert roles (role_name) VALUE ('USER');
+insert users_roles (id_user, id_role) VALUE (1, 1);
+insert users_roles (id_user, id_role) VALUE (1, 2);
+insert users_roles (id_user, id_role) VALUE (2, 2);
+insert users_roles (id_user, id_role) VALUE (3, 2);
+------------------------------------------------------------------------------------------------------------------------
+insert users (name, surname, username, password) VALUES ('Elizaveta', 'Akulova', 'ea', '4');
+insert users (name, surname, username, password) VALUES ('Elina', 'Andreeva', 'ea', '5');
+------------------------------------------------------------------------------------------------------------------------
+spring.jpa.database-platform=org.hibernate.dialect.MySQL5Dialect
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+------------------------------------------------------------------------------------------------------------------------
+TypedQuery<Role> q = entityManager.createQuery("select role from Role role where role.id = :id", Role.class);
+q.setParameter("id", id);
+Role result = q.getResultList().stream().filter(role -> role.getId() == id).findAny().orElse(null);
+roleResult.add(result);
+------------------------------------------------------------------------------------------------------------------------
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg320mUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg320mUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg320mUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+------------------------------------------------------------------------------------------------------------------------
++ Необходимо затемнение сделать!!!
+------------------------------------------------------------------------------------------------------------------------
+<style>
+            #okno {
+                width: 400px;
+                height: 600px;
+                text-align: center;
+                padding: 15px;
+                border: none;
+                border-radius: 10px;
+                color: #000000;
+                display: none;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+            }
+            #okno:target {display: block;}
+            .close {
+                display: inline-block;
+                border: none;
+                color: #000000;
+                padding: 0 12px;
+                margin: 10px;
+                text-decoration: none;
+                background-color: #808080;
+                font-size: 14pt;
+                cursor:pointer;
+                border-radius: 5px 5px 5px 5px;
+                color: #FFFAFA;
+            }
+            .close:hover {background: #e6e6ff;}
+            .topPartModalWindow{
+                border: 1px solid #DCDCDC;
+                background-color: #F5F5F5;
+                border-radius: 5px 5px 0px 0px;
+            }
+            .midlePartModalWindow{
+                border: 1px solid #DCDCDC;
+                background-color: #F5F5F5;
+            }
+            .downPartModalWindow{
+                border: 1px solid #DCDCDC;
+                background-color: #F5F5F5;
+                border-radius: 0px 0px 5px 5px;
+
+            }
+
+            .inputOfBomalWindow{
+                border: 1px solid #DCDCDC;
+                border-radius: 5px 5px 5px 5px;
+            }
+</style>
+------------------------------------------------------------------------------------------------------------------------
+<form action="#okno">
+  <td><input class="buttonOne" type="submit" value="Edite"></td>
+</form>
+------------------------------------------------------------------------------------------------------------------------
+      <div id="okno" th:object="${user}">
+          <th:block >
+              <form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}">
+                  <div class="topPartModalWindow" align="Left">
+                      <br><h4>Edite user</h4></br>
+                  </div>
+                  <div class="midlePartModalWindow" align="center">
+                      <br><b class="inputOfBomalWindow2">ID</b></br>
+                      <td><input class="inputOfBomalWindow" th:text="${user.getId()}" id="id"/></td>
+                      <br><b class="inputOfBomalWindow2">Name</b></br>
+                      <td><input class="inputOfBomalWindow" type="text" th:field="*{}" id="name2" /></td>
+                      <br><b class="inputOfBomalWindow2">Surname</b></br>
+                      <td><input class="inputOfBomalWindow" type="text" th:field="*{}" id="surname2" /></td>
+                      <br><b class="inputOfBomalWindow2">Username</b></br>
+                      <td><input class="inputOfBomalWindow" type="text" th:field="*{}" id="username2" /></td>
+                      <br><b class="inputOfBomalWindow2">Password</b></br>
+                      <td><input class="inputOfBomalWindow" type="text" th:field="*{}" id="password2" /></td>
+                      <br><b class="inputOfBomalWindow2">Role</b></br>
+                      <select class="" name="select" size="2" multiple>
+                          <option value="v1">Admin</option>
+                          <option value="v2">User</option>
+                      </select>
+                  </div>
+                  <div class="downPartModalWindow" align="right">
+                      <a href="#" class="close">Close</a>
+                      <input class="buttonOne" type="submit" value="Save">
+                  </div>
+              </form>
+          </th:block>
+      </div>
+------------------------------------------------------------------------------------------------------------------------
+<td><input class="buttonOne" type="submit" value="Edite"></td>
+ <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
+<td><input class="buttonTwo" type="submit" value="Delete"></td>
+------------------------------------------------------------------------------------------------------------------------
+<form method="GET" th:action="@{/admin/{id}(id=${user.getId()})}">
+------------------------------------------------------------------------------------------------------------------------
+                                <form action="#windowOfEditUser">
+                                    <td><input class="buttonOne" type="submit" value="Update"></td>
+                                </form>
+                                <form action="#windowOfDeleteUser">
+                                    <td><input class="buttonOne" type="submit" value="Delete"></td>
+                                </form>
+
+      <div class="modal fade" id="editeModal">
+          <th:block th:object="${user}">
+          <form th:method="PATCH" th:action="@{/users}">
+              <div class="topPartModalWindow" align="Left">
+                  <br><h4>Edite user</h4></br>
+              </div>
+              <div class="midlePartModalWindow" align="center">
+                  <br><b class="inputOfBomalWindow2">ID</b></br>
+                  <td><input class="inputOfBomalWindow" th:value="*{id}" id="id"/></td>
+                  <br><b class="inputOfBomalWindow2">Name</b></br>
+                  <td><input class="inputOfBomalWindow" type="text" th:value="*{name}" id="name2" /></td>
+                  <br><b class="inputOfBomalWindow2">Surname</b></br>
+                  <td><input class="inputOfBomalWindow" type="text" th:value="*{surname}" id="surname2" /></td>
+                  <br><b class="inputOfBomalWindow2">Username</b></br>
+                  <td><input class="inputOfBomalWindow" type="text" th:value="*{username}" id="username2" /></td>
+                  <br><b class="inputOfBomalWindow2">Password</b></br>
+                  <td><input class="inputOfBomalWindow" type="text" th:value="*{password}" id="password2" /></td>
+                  <br><b class="inputOfBomalWindow2">Role</b></br>
+                  <select class="" name="select" size="2" multiple>
+                      <option value="v1">Admin</option>
+                      <option value="v2">User</option>
+                  </select>
+              </div>
+              <div class="downPartModalWindow" align="right">
+                  <a href="#" class="close">Close</a>
+                  <input class="buttonOne" type="submit" value="Save"/>
+              </div>
+          </form>
+          </th:block>
+      </div>
+
+      <div class="modal" id="windowOfDeleteUser">
+          <th:block th:object="${user}">
+          <form th:method="PATCH" th:action="@{/users}">
+              <div class="topPartModalWindow" align="Left">
+                  <br><h4>Delete user</h4></br>
+              </div>
+              <div class="midlePartModalWindow" align="center">
+                  <br><b class="inputOfBomalWindow2">ID</b></br>
+                  <td><input class="inputOfBomalWindow" th:value="*{id}" id="id3"/></td>
+                  <br><b class="inputOfBomalWindow2">Name</b></br>
+                  <td><input class="inputOfBomalWindow" type="text" th:value="*{name}" id="name3" /></td>
+                  <br><b class="inputOfBomalWindow2">Surname</b></br>
+                  <td><input class="inputOfBomalWindow" type="text" th:value="*{surname}" id="surname3" /></td>
+                  <br><b class="inputOfBomalWindow2">Username</b></br>
+                  <td><input class="inputOfBomalWindow" type="text" th:value="*{username}" id="username3" /></td>
+                  <br><b class="inputOfBomalWindow2">Role</b></br>
+                  <select class="" name="select" size="2" multiple>
+                      <option value="v1">Admin</option>
+                      <option value="v2">User</option>
+                  </select>
+              </div>
+              <div class="downPartModalWindow" align="right">
+                  <a href="#" class="close">Close</a>
+                  <input class="buttonOne" type="submit" value="Delete"/>
+              </div>
+          </form>
+          </th:block>
+      </div>
+------------------------------------------------------------------------------------------------------------------------
+                  <br><b class="inputOfBomalWindow2">ID</b></br>
+                  <input type="text" class="form-control" id="id2" name="id"/>
+                  <br><b class="inputOfBomalWindow2">Name</b></br>
+                  <input type="text" class="form-control" id="name2" name="name"/>
+                  <br><b class="inputOfBomalWindow2">Surname</b></br>
+                  <input type="text" class="form-control" id="surname2" name="surname"/>
+                  <br><b class="inputOfBomalWindow2">Username</b></br>
+                  <input type="text" class="form-control" id="username2" name="username"/>
+                  <br><b class="inputOfBomalWindow2">Password</b></br>
+                  <input type="text" class="form-control" id="password2" name="password"/>
+                  <br><b class="inputOfBomalWindow2">Role</b></br>
+------------------------------------------------------------------------------------------------------------------------
+                  <br><b class="inputOfBomalWindow2">ID</b></br>
+                  <input type="text" class="form-control" id="id3" name="id"/>
+                  <br><b class="inputOfBomalWindow2">Name</b></br>
+                  <input type="text" class="form-control" id="name3" name="name"/>
+                  <br><b class="inputOfBomalWindow2">Surname</b></br>
+                  <input type="text" class="form-control" id="surname3" name="surname"/>
+                  <br><b class="inputOfBomalWindow2">Username</b></br>
+                  <input type="text" class="form-control" id="username3" name="username"/>
+------------------------------------------------------------------------------------------------------------------------
+                  <td><input class="buttonOne" type="submit" value="Update" th:href="@{/getSpecificUser/(id=${user.id})}" ></td>
+                  <td><input class="buttonTwo" type="submit" value="Delete" th:href="@{/getSpecificUser/(id=${user.id})}"></td>
+------------------------------------------------------------------------------------------------------------------------
+            .topPartModalWindow{
+                border: 1px solid #DCDCDC;
+                background-color: #F5F5F5;
+                border-radius: 5px 5px 0px 0px;
+            }
+            .midlePartModalWindow{
+                border: 1px solid #DCDCDC;
+                background-color: #F5F5F5;
+            }
+            .downPartModalWindow{
+                border: 1px solid #DCDCDC;
+                background-color: #F5F5F5;
+                border-radius: 0px 0px 5px 5px;
+
+            }
+            #windowOfEditUser {
+                width: 500px;
+                height: 600px;
+                text-align: center;
+                padding: 15px;
+                border: none;
+                border-radius: 10px;
+                color: #000000;
+                display: none;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+            }
+            #windowOfEditUser:target {
+                display: block;
+            }
+            #windowOfDeleteUser {
+                width: 400px;
+                height: 600px;
+                text-align: center;
+                padding: 15px;
+                border: none;
+                border-radius: 10px;
+                color: #000000;
+                display: none;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+            }
+            #windowOfDeleteUser:target {
+                display: block;
+            }
+------------------------------------------------------------------------------------------------------------------------

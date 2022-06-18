@@ -81,8 +81,6 @@ public class UserServiceImpl implements UserService {
         roles.add(roleService.getRole("USER"));
         if (role != null && role.equals("ADMIN")) {
             roles.add(roleService.getRole("ADMIN"));
-        } else {
-            roles.add(new Role(role));
         }
         return roles;
     }

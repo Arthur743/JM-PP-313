@@ -32,8 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user, String role) {
-        user.setRoles(roleExistenceCheck(role));
+    public void updateUser(User user) {
         user.setPassword(new BCryptPasswordEncoder(8).encode(user.getPassword()));
         userDao.setUser(user);
     }
@@ -52,8 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void setUser(User user, String role) {
-        user.setRoles(roleExistenceCheck(role));
+    public void setUser(User user) {
         user.setPassword(new BCryptPasswordEncoder(8).encode(user.getPassword()));
         userDao.setUser(user);
     }
@@ -69,19 +67,14 @@ public class UserServiceImpl implements UserService {
     public User getSpecificUser(String username) throws UsernameNotFoundException {
         return userDao.getSpecificUsername(username);
     }
-
-    @Transactional
-    public void testSetUser(User user) {
-        user.setPassword(new BCryptPasswordEncoder(8).encode(user.getPassword()));
-        userDao.setUser(user);
-    }
-
-    public Set<Role> roleExistenceCheck(String role){
+    @Override
+    public User roleExistenceCheck(User user, String role){
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRole("USER"));
         if (role != null && role.equals("ADMIN")) {
             roles.add(roleService.getRole("ADMIN"));
         }
-        return roles;
+        user.setRoles(roles);
+        return user;
     }
 }

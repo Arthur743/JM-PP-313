@@ -30,13 +30,13 @@ public class AdminController {
 
     @PostMapping("/users")
     public String createNewUser(@ModelAttribute("newUser") User newUser, @RequestParam(required = false) String roleAdd) {
-        userService.setUser(newUser, roleAdd);
+        userService.setUser(userService.roleExistenceCheck(newUser, roleAdd));
         return "redirect:/admin/users";
     }
 
     @PatchMapping("/update")
     public String updateOldUser(@ModelAttribute(name = "user") User user, @RequestParam(required = false) String role) {
-        userService.updateUser(user, role);
+        userService.updateUser(userService.roleExistenceCheck(user, role));
         return "redirect:/admin/users";
     }
 

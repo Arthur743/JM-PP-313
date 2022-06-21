@@ -43,14 +43,14 @@ public class NewUsersOfDB {
             Set<Role> roles = new HashSet<>();
             roles.add(roleService.getRole("ADMIN"));
             roles.add(roleService.getRole("USER"));
-            userService.testSetUser(new User("Faina", "Amandosova", "1","11", roles));
+            userService.setUser(new User("Faina", "Amandosova", "1","11", roles));
         }
         try {
             User user = userService.getSpecificUser("Diana");
         } catch (Exception e) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleService.getRole("USER"));
-            userService.testSetUser(new User("Diana", "Aktuganova", "2", "22", roles));
+            userService.setUser(new User("Diana", "Aktuganova", "2", "22", roles));
         }
 
     }

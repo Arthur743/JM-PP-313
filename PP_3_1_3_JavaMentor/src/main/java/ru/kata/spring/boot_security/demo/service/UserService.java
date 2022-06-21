@@ -8,17 +8,17 @@ public interface UserService {
 
     List<User> getUsers();
 
-    void updateUser(User user, String role);
+    void updateUser(User user);
 
     User getUser(int id);
 
     void deleteUser(User user);
 
-    void setUser(User user, String role);
+    void setUser(User user);
 
     UserDetails getSpecificUsername(String s);
 
     User getSpecificUser(String username);
 
-    void testSetUser(User user);
+    public User roleExistenceCheck(User user, String role);
 }
